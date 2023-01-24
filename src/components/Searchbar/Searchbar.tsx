@@ -4,7 +4,11 @@ import React, { useState } from 'react'
 
 import { BiSearch } from 'react-icons/bi'
 
-export default function Searchbar () {
+interface SearchbarProps {
+    setQuery: (query: string) => void
+}
+
+export default function Searchbar ({ setQuery }: SearchbarProps) {
 
     const [ input, setInput ] = useState('')
 
@@ -13,8 +17,16 @@ export default function Searchbar () {
         setInput((target as HTMLInputElement).value)
     }
 
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
+
+        if (input.length < 1) return
+
+        setQuery(input)
+    }
+
     return (
-        <form className={styles.form}>
+        <form onSubmit={handleSubmit} className={styles.form}>
             <input onChange={handleInput} value={input} className={styles.form__searchbar} type={'text'} placeholder='Search words...' />
             <BiSearch className={styles.form__searchIcon} />
         </form>

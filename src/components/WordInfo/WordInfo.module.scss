@@ -1,0 +1,65 @@
+$accent-color: #e879f9;
+$accent-color-light: #f5d0fe;
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin-inline: auto;
+    margin-top: 3rem;
+}
+
+.wordInfo {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.6rem;
+
+    
+
+    &__word {
+        font-size: 40px;
+        
+        &::first-letter {
+            text-transform: uppercase;
+        }
+    }
+
+    &__phonetic {
+        color: $accent-color;
+        font-size: 22px;
+    }
+}
+
+.playBtn {
+    border: none;
+    border-radius: 50%;
+
+    width: 50px;
+    height: 50px;
+
+    background-color: $accent-color-light;
+    
+    font-size: 30px;
+    color: $accent-color;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: .9;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 1;
+        
+    }
+
+    &__icon {
+        display: block;
+        transform: translateX(1px);
+    }
+}
