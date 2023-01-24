@@ -6,6 +6,7 @@ import Header from './components/Header/Header'
 import Searchbar from './components/Searchbar/Searchbar'
 import WordInfo from './components/WordInfo/WordInfo'
 import Section from './components/Section/Section'
+import SourceInfo from './components/SourceInfo/SourceInfo'
 
 interface Data {
   license: {}
@@ -54,6 +55,7 @@ function App() {
       {data?.meanings.map((el, index) => (
         <Section key={index} antonyms={el.antonyms} definitions={el.definitions} partOfSpeech={el.partOfSpeech} synonyms={el.synonyms} />
       ))}
+      <SourceInfo links={data?.sourceUrls} />
     </div>
   )
 }
