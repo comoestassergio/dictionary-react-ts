@@ -5,6 +5,7 @@ import axios from 'axios'
 import Header from './components/Header/Header'
 import Searchbar from './components/Searchbar/Searchbar'
 import WordInfo from './components/WordInfo/WordInfo'
+import Section from './components/Section/Section'
 
 interface Data {
   license: {}
@@ -15,7 +16,7 @@ interface Data {
   word: string
 }
 
-interface Meaning {
+export interface Meaning {
   antonyms: string []
   definitions: Definition []
   partOfSpeech: string
@@ -50,6 +51,9 @@ function App() {
       <Header />
       <Searchbar setQuery={setQuery} />
       <WordInfo word={data?.word} phonetic={data?.phonetic} />
+      {data?.meanings.map((el, index) => (
+        <Section key={index} antonyms={el.antonyms} definitions={el.definitions} partOfSpeech={el.partOfSpeech} synonyms={el.synonyms} />
+      ))}
     </div>
   )
 }
