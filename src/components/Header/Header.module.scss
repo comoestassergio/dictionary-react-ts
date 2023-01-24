@@ -1,0 +1,57 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 2rem;
+
+    &__toggle {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        opacity: .7;
+
+        &__active {
+            opacity: 1;
+        }
+    }
+}
+
+.toggle {
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        width: 50px;
+        height: 25px;
+
+        padding: 3px;
+
+        border-radius: 20px;
+        border: 2px solid black;
+
+        &__active {
+            justify-content: flex-end;
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        input {
+            appearance: none;
+        }
+    }
+
+    &__hand {
+        display: inline-block;
+
+        width: 15px;
+        height: 15px;
+
+        background-color: black;
+
+        border-radius: 50%;
+    }
+}
