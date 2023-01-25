@@ -1,3 +1,5 @@
+$accent-color: #e879f9;
+
 .sourceInfo {
     display: flex;
     flex-direction: column;
@@ -14,8 +16,9 @@
         height: 1px;
         width: 100%;
 
-        background-color: black;
+        background-color: white;
         opacity: 0.2;
+        mix-blend-mode: difference;
 
         margin-bottom: 1rem;
     }
@@ -26,11 +29,18 @@
     }
 
     &__link {
-        color: black;
+        color: white;
+        mix-blend-mode: difference;
+        opacity: .8;
 
         display: flex;
         align-items: center;
         gap: .6rem;
+
+        &:hover {
+            mix-blend-mode: normal;
+            color: darken($accent-color, 10%);
+        }
 
         svg {
             display: inline-block;

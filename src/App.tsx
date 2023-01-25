@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import './App.css'
+import './App.scss'
 import axios from 'axios'
+import classNames from 'classnames'
 
 import Header from './components/Header/Header'
 import Searchbar from './components/Searchbar/Searchbar'
@@ -33,6 +34,7 @@ interface Definition {
 
 function App() {
 
+  const [ isDarkMode, setIsDarkMode ] = useState(false)
   const [ query, setQuery ] = useState<string | null>('dictionary')
   const [ data, setData ] = useState<Data>()
 
@@ -54,23 +56,23 @@ function App() {
   }, [query])
 
   return (
-    <div className="App">
-      <Header />
-      <Searchbar setQuery={setQuery} />
-      {!data && 
-        <Loader />
-      }
-      {data && 
-        <>
-          <WordInfo word={data?.word} phonetic={data?.phonetic} />
-          {data?.meanings.map((el, index) => (
-            <Section key={index} antonyms={el.antonyms} definitions={el.definitions} partOfSpeech={el.partOfSpeech} synonyms={el.synonyms} setQuery={setQuery} />
-          ))}
-          <SourceInfo links={data?.sourceUrls} />
-        </>
-      }
-      
-      
+    <div className={classNames('App', {['App__dark']: isDarkMode})}>
+      <div className='wrapper'>
+        <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+        <Searchbar setQuery={setQuery} isDarkMode={isDarkMode} />
+        {!data && 
+          <Loader />
+        }
+        {data && 
+          <>
+            <WordInfo word={data?.word} phonetic={data?.phonetic} isDarkMode={isDarkMode} />
+            {data?.meanings.map((el, index) => (
+              <Section key={index} antonyms={el.antonyms} definitions={el.definitions} partOfSpeech={el.partOfSpeech} synonyms={el.synonyms} setQuery={setQuery} />
+            ))}
+            <SourceInfo links={data?.sourceUrls} />
+          </>
+        }
+      </div>
     </div>
   )
 }

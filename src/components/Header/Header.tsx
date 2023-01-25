@@ -4,11 +4,15 @@ import React, { useState } from 'react'
 
 interface IconProps {
     size: string
+    isDarkMode?: boolean
 }
 
-export default function Header () {
+interface HeaderProps {
+    isDarkMode: boolean
+    setIsDarkMode: (value: boolean) => void
+}
 
-    const [ isDarkMode, setIsDarkMode ] = useState(false)
+export default function Header ({ isDarkMode, setIsDarkMode }:HeaderProps) {
 
     const handleClick = (e: React.FormEvent<HTMLInputElement>) => {
         const {target} = e
@@ -17,7 +21,7 @@ export default function Header () {
 
     return (
         <header className={styles.header}>
-            <Logo size="50" />
+            <Logo size="50" isDarkMode={isDarkMode} />
             <div className={classNames(styles.header__toggle, {[styles.header__toggle__active] : isDarkMode})}>
                 <form>
                     <label className={classNames(styles.toggle__container, {[styles.toggle__container__active]: isDarkMode})} htmlFor='theme-switch'>
@@ -26,7 +30,7 @@ export default function Header () {
                     </label>
                 </form>
                 {isDarkMode ? 
-                    <LightModeIcon size='35' />
+                    <LightModeIcon size='35' isDarkMode={isDarkMode} />
                     :
                     <DarkModeIcon size="35" />
                 }
@@ -36,13 +40,16 @@ export default function Header () {
 }
 
 
-export function Logo ({ size }: IconProps) {
+export function Logo ({ size, isDarkMode }: IconProps) {
+
+    const strokeColor = isDarkMode ? 'rgb(207, 207, 207)' : '#292D32'
+
     return (
         <svg width={`${size}px`} height={`${size}px`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.5 18V7C3.5 3 4.5 2 8.5 2H15.5C19.5 2 20.5 3 20.5 7V17C20.5 17.14 20.5 17.28 20.49 17.42" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M6.35 15H20.5V18.5C20.5 20.43 18.93 22 17 22H7C5.07 22 3.5 20.43 3.5 18.5V17.85C3.5 16.28 4.78 15 6.35 15Z" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8 7H16" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M8 10.5H13" stroke="#292D32" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M3.5 18V7C3.5 3 4.5 2 8.5 2H15.5C19.5 2 20.5 3 20.5 7V17C20.5 17.14 20.5 17.28 20.49 17.42" stroke={strokeColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M6.35 15H20.5V18.5C20.5 20.43 18.93 22 17 22H7C5.07 22 3.5 20.43 3.5 18.5V17.85C3.5 16.28 4.78 15 6.35 15Z" stroke={strokeColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M8 7H16" stroke={strokeColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M8 10.5H13" stroke={strokeColor} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
         </svg>
     )
 }
@@ -62,10 +69,13 @@ export function DarkModeIcon ({ size }: IconProps) {
     )
 }
 
-export function LightModeIcon ({ size }: IconProps) {
+export function LightModeIcon ({ size, isDarkMode }: IconProps) {
+
+    const fillColor = isDarkMode ? 'rgb(207, 207, 207)' : '#292D32'
+
     return (
         <svg width={`${size}px`} height={`${size}px`} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#a)" fill="#000000">
+            <g clipPath="url(#a)" fill={fillColor}>
             <path d="M12 0a1 1 0 0 1 1 1v4a1 1 0 1 1-2 0V1a1 1 0 0 1 1-1ZM4.929 3.515a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 0 0 1.414-1.414L4.93 3.515ZM1 11a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2H1ZM18 12a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1ZM17.657 16.243a1 1 0 0 0-1.414 1.414l2.828 2.828a1 1 0 1 0 1.414-1.414l-2.828-2.828ZM7.757 17.657a1 1 0 1 0-1.414-1.414L3.515 19.07a1 1 0 1 0 1.414 1.414l2.828-2.828ZM20.485 4.929a1 1 0 0 0-1.414-1.414l-2.828 2.828a1 1 0 1 0 1.414 1.414l2.828-2.828ZM13 19a1 1 0 1 0-2 0v4a1 1 0 1 0 2 0v-4ZM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10Z"/>
             </g>
             <defs>

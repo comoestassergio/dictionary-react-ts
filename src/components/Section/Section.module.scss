@@ -29,8 +29,9 @@ $accent-color: #e879f9;
         display: inline-block;
         height: 1px;
         width: 100%;
-        background-color: black;
+        background-color: white;
         opacity: .2;
+        mix-blend-mode: difference;
     }
 }
 

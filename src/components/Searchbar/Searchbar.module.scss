@@ -14,10 +14,16 @@
         font-size: 18px;
         font-weight: 600;
 
+        transition: color 300ms ease-in, background-color 300ms ease-in;
+
         &:active, 
         &:focus {
             outline: none;
-            box-shadow: 0px 0px 10px 2px $accent-color;
+            box-shadow: 0px 0px 5px 1px darken($accent-color, 30%);
+        }
+
+        &__dark {
+            background-color: #191919;
         }
     }
 

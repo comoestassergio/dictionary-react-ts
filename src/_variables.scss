@@ -1,1 +1,9 @@
 $accent-color: #e879f9;
+
+@function set-text-color ($color) {
+    @if(lightness($color) > 70) {
+        @return #333;
+    } @else {
+        @return rgb(207, 207, 207);
+    }
+}
