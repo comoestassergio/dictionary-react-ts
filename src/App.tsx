@@ -7,6 +7,7 @@ import Searchbar from './components/Searchbar/Searchbar'
 import WordInfo from './components/WordInfo/WordInfo'
 import Section from './components/Section/Section'
 import SourceInfo from './components/SourceInfo/SourceInfo'
+import Loader from './components/Loader/Loader'
 
 interface Data {
   license: {}
@@ -51,11 +52,20 @@ function App() {
     <div className="App">
       <Header />
       <Searchbar setQuery={setQuery} />
-      <WordInfo word={data?.word} phonetic={data?.phonetic} />
-      {data?.meanings.map((el, index) => (
-        <Section key={index} antonyms={el.antonyms} definitions={el.definitions} partOfSpeech={el.partOfSpeech} synonyms={el.synonyms} />
-      ))}
-      <SourceInfo links={data?.sourceUrls} />
+      {!data && 
+        <Loader />
+      }
+      {data && 
+        <>
+          <WordInfo word={data?.word} phonetic={data?.phonetic} />
+          {data?.meanings.map((el, index) => (
+            <Section key={index} antonyms={el.antonyms} definitions={el.definitions} partOfSpeech={el.partOfSpeech} synonyms={el.synonyms} />
+          ))}
+          <SourceInfo links={data?.sourceUrls} />
+        </>
+      }
+      
+      
     </div>
   )
 }

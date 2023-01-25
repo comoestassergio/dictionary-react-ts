@@ -1,0 +1,25 @@
+.loader {
+    height: 60vh;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__icon {
+        font-size: 1.8rem;
+        opacity: .6;
+
+        animation: spin 1300ms ease-in-out infinite forwards;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
