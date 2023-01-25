@@ -44,6 +44,11 @@ function App() {
   useEffect(() => {
     if (query !== null) {
       handleSearchWord()
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      })
     }
 
   }, [query])
@@ -59,7 +64,7 @@ function App() {
         <>
           <WordInfo word={data?.word} phonetic={data?.phonetic} />
           {data?.meanings.map((el, index) => (
-            <Section key={index} antonyms={el.antonyms} definitions={el.definitions} partOfSpeech={el.partOfSpeech} synonyms={el.synonyms} />
+            <Section key={index} antonyms={el.antonyms} definitions={el.definitions} partOfSpeech={el.partOfSpeech} synonyms={el.synonyms} setQuery={setQuery} />
           ))}
           <SourceInfo links={data?.sourceUrls} />
         </>

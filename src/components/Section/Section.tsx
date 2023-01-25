@@ -2,7 +2,17 @@ import styles from './Section.module.scss'
 import { Meaning } from '../../App'
  
 
-export default function Section ({ antonyms, definitions, partOfSpeech, synonyms }: Meaning) {
+interface SectionProps extends Meaning {
+    setQuery: (query: string) => void
+}
+
+export default function Section ({ antonyms, definitions, partOfSpeech, synonyms, setQuery }: SectionProps) {
+
+    const handleClick = (e: React.MouseEvent) => {
+        const {target} = e
+        setQuery((target as HTMLElement).innerText)
+    }
+
     return (
         <section className={styles.section}>
             <div className={styles.title}>
@@ -22,7 +32,7 @@ export default function Section ({ antonyms, definitions, partOfSpeech, synonyms
                     <p className={styles.related__title}>antonyms</p> 
                     <ul className={styles.related__list}>
                         {antonyms.map((el, index) => (
-                            <li key={index}>{el}</li>
+                            <li onClick={handleClick} key={index}>{el}</li>
                         ))}
                     </ul>
                 </div>
@@ -33,7 +43,7 @@ export default function Section ({ antonyms, definitions, partOfSpeech, synonyms
                     <p className={styles.related__title}>synonyms</p> 
                     <ul className={styles.related__list}>
                         {synonyms.map((el, index) => (
-                            <li key={index}>{el}</li>
+                            <li onClick={handleClick} key={index}>{el}</li>
                         ))}
                     </ul>
                 </div>

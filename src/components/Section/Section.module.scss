@@ -93,6 +93,11 @@ $accent-color: #e879f9;
         & > li {
             color: $accent-color;
             font-weight: 700;
+
+            &:hover {
+                color: darken($accent-color, 10%);
+                cursor: pointer;
+            }
         }
     }
 }
