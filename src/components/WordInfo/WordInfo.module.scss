@@ -69,4 +69,19 @@ $accent-color-light: #f5d0fe;
         display: block;
         transform: translateX(1px);
     }
+
+    &__loadingIcon {
+        font-size: 16px;
+        animation: spin 1300ms ease-in-out infinite forwards;
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

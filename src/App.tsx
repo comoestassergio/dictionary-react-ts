@@ -14,7 +14,7 @@ interface Data {
   license: {}
   meanings: Meaning []
   phonetic: string
-  phonetics: []
+  phonetics: PhoneticsObj []
   sourceUrls: string []
   word: string
 }
@@ -30,6 +30,12 @@ interface Definition {
   definition: string
   synonyms: []
   antonyms: []
+}
+
+export interface PhoneticsObj {
+  audio?: string
+  text?: string
+  sourceUrl?: string
 }
 
 function App() {
@@ -65,7 +71,7 @@ function App() {
         }
         {data && 
           <>
-            <WordInfo word={data?.word} phonetic={data?.phonetic} isDarkMode={isDarkMode} />
+            <WordInfo word={data?.word} phonetic={data?.phonetic} isDarkMode={isDarkMode} phonetics={data.phonetics} />
             {data?.meanings.map((el, index) => (
               <Section key={index} antonyms={el.antonyms} definitions={el.definitions} partOfSpeech={el.partOfSpeech} synonyms={el.synonyms} setQuery={setQuery} />
             ))}
