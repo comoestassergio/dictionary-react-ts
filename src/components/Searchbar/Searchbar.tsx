@@ -30,7 +30,9 @@ export default function Searchbar ({ setQuery, isDarkMode }: SearchbarProps) {
     return (
         <form onSubmit={handleSubmit} className={styles.form}>
             <input onChange={handleInput} value={input} className={classNames(styles.form__searchbar, {[styles.form__searchbar__dark]: isDarkMode})} type={'text'} placeholder='Search words...' />
-            <BiSearch className={styles.form__searchIcon} />
+            <button type='submit' className={styles.form__searchIcon}>
+                <BiSearch  />
+            </button>
         </form>
     )
 }
