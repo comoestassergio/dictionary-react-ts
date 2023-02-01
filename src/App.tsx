@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.scss'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import classNames from 'classnames'
 
 import Header from './components/Header/Header'
@@ -38,15 +38,29 @@ export interface PhoneticsObj {
   sourceUrl?: string
 }
 
+export interface ApiError {
+  title: string
+  message?: string
+  resolution?: string
+}
+
 function App() {
 
   const [ isDarkMode, setIsDarkMode ] = useState(false)
   const [ query, setQuery ] = useState<string | null>('dictionary')
   const [ data, setData ] = useState<Data>()
+  const [ error, setError ] = useState<ApiError | null>(null)
 
   const handleSearchWord = async () => {
-    const res = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
-    setData(res.data[0])
+    try {
+      const res = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
+      setData(res.data[0])
+      setError(null)
+    }catch(error: unknown) {
+      if (error instanceof AxiosError) {
+        setError(error?.response?.data)
+      }
+    }
   } 
 
   useEffect(() => {
@@ -65,7 +79,7 @@ function App() {
     <div className={classNames('App', {['App__dark']: isDarkMode})}>
       <div className='wrapper'>
         <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-        <Searchbar setQuery={setQuery} isDarkMode={isDarkMode} />
+        <Searchbar setQuery={setQuery} isDarkMode={isDarkMode} error={error} />
         {!data && 
           <Loader />
         }

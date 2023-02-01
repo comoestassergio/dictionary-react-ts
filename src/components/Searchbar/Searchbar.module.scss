@@ -1,6 +1,6 @@
-.form {
-    $accent-color: #e879f9;
+$accent-color: #e879f9;
 
+.form {
     position: relative;
     margin: 1.5rem 0;
 
@@ -42,6 +42,13 @@
             color: lighten($accent-color, 10%);
         }
     }
+}
+
+.error {
+    color: $accent-color;
+    font-weight: 800;
+    width: 85%;
+    margin: 0 auto;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -4,13 +4,15 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 
 import { BiSearch } from 'react-icons/bi'
+import { ApiError } from '../../App'
 
 interface SearchbarProps {
     setQuery: (query: string) => void
     isDarkMode: boolean
+    error: ApiError | null
 }
 
-export default function Searchbar ({ setQuery, isDarkMode }: SearchbarProps) {
+export default function Searchbar ({ setQuery, isDarkMode, error }: SearchbarProps) {
 
     const [ input, setInput ] = useState('')
 
@@ -28,11 +30,15 @@ export default function Searchbar ({ setQuery, isDarkMode }: SearchbarProps) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className={styles.form}>
-            <input onChange={handleInput} value={input} className={classNames(styles.form__searchbar, {[styles.form__searchbar__dark]: isDarkMode})} type={'text'} placeholder='Search words...' />
-            <button type='submit' className={styles.form__searchIcon}>
-                <BiSearch  />
-            </button>
-        </form>
+        <>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <input onChange={handleInput} value={input} className={classNames(styles.form__searchbar, {[styles.form__searchbar__dark]: isDarkMode})} type={'text'} placeholder='Search words...' />
+                <button type='submit' className={styles.form__searchIcon}>
+                    <BiSearch  />
+                </button>
+            </form>
+            {error && <p className={styles.error}>{error.title}</p>}
+        </>
+        
     )
 }
