@@ -44,9 +44,14 @@ export interface ApiError {
   resolution?: string
 }
 
+function darkTheme () {
+  return window.matchMedia('(prefers-color-scheme: dark)')
+}
+
+
 function App() {
 
-  const [ isDarkMode, setIsDarkMode ] = useState(false)
+  const [ isDarkMode, setIsDarkMode ] = useState(darkTheme().matches)
   const [ query, setQuery ] = useState<string | null>('dictionary')
   const [ data, setData ] = useState<Data>()
   const [ error, setError ] = useState<ApiError | null>(null)

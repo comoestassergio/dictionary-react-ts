@@ -14,9 +14,8 @@ interface HeaderProps {
 
 export default function Header ({ isDarkMode, setIsDarkMode }:HeaderProps) {
 
-    const handleClick = (e: React.FormEvent<HTMLInputElement>) => {
-        const {target} = e
-        setIsDarkMode((target as HTMLInputElement).checked)
+    const handleClick = () => {
+        setIsDarkMode(!isDarkMode)
     }
 
     return (
