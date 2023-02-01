@@ -36,3 +36,15 @@
         color: $accent-color;
     }
 }
+
+@media (prefers-color-scheme: dark) {
+    .form {
+        &__searchbar {
+            color: black;
+
+            &__dark {
+                color: white;
+            }
+        }
+    }
+}
