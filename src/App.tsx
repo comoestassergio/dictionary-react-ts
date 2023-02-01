@@ -55,9 +55,9 @@ function App() {
   const handleSearchWord = async () => {
     try {
       setLoading(true)
+      setError(null)
       const res = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
       setData(res.data[0])
-      setError(null)
       setLoading(false)
     }catch(error: unknown) {
       if (error instanceof AxiosError) {
