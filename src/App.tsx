@@ -50,15 +50,19 @@ function App() {
   const [ query, setQuery ] = useState<string | null>('dictionary')
   const [ data, setData ] = useState<Data>()
   const [ error, setError ] = useState<ApiError | null>(null)
+  const [ loading, setLoading ] = useState<boolean>(false)
 
   const handleSearchWord = async () => {
     try {
+      setLoading(true)
       const res = await axios.get(`https://api.dictionaryapi.dev/api/v2/entries/en/${query}`)
       setData(res.data[0])
       setError(null)
+      setLoading(false)
     }catch(error: unknown) {
       if (error instanceof AxiosError) {
         setError(error?.response?.data)
+        setLoading(false)
       }
     }
   } 
@@ -80,10 +84,10 @@ function App() {
       <div className='wrapper'>
         <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
         <Searchbar setQuery={setQuery} isDarkMode={isDarkMode} error={error} />
-        {!data && 
+        {loading && 
           <Loader />
         }
-        {data && 
+        {data && !loading && 
           <>
             <WordInfo word={data?.word} phonetic={data?.phonetic} isDarkMode={isDarkMode} phonetics={data.phonetics} />
             {data?.meanings.map((el, index) => (

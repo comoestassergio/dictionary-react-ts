@@ -30,7 +30,7 @@ export default function WordInfo ({ word, phonetic, isDarkMode, phonetics }: Wor
     }, [phonetics])
     
     useEffect(() => {
-        audio.src = audioUrl.audio!
+        audio.src = audioUrl?.audio!
 
     }, [audioUrl])
 
@@ -53,20 +53,22 @@ export default function WordInfo ({ word, phonetic, isDarkMode, phonetics }: Wor
                 <h1 className={styles.wordInfo__word}>{word}</h1>
                 <p className={styles.wordInfo__phonetic}>{phonetic}</p>
             </div>
-            <button onClick={togglePlay} className={classNames(styles.playBtn, {[styles.playBtn__dark]: isDarkMode})} type='button'>
-                {audioUrl ?
-                    <>
-                        {playing ? 
-                            <BiPause className={styles.playBtn__icon} />
-                            :
-                            <BiPlay className={styles.playBtn__icon} />
-                        }
-                    </>  
-                    :
-                    <ImSpinner8 className={styles.playBtn__loadingIcon} />
-                }
+            {audioUrl &&
+                <button onClick={togglePlay} className={classNames(styles.playBtn, {[styles.playBtn__dark]: isDarkMode})} type='button'>
+                    {audioUrl ?
+                        <>
+                            {playing ? 
+                                <BiPause className={styles.playBtn__icon} />
+                                :
+                                <BiPlay className={styles.playBtn__icon} />
+                            }
+                        </>  
+                        :
+                        <ImSpinner8 className={styles.playBtn__loadingIcon} />
+                    }
                 
-            </button>
+                </button>
+            }
         </div>
     )
 }
